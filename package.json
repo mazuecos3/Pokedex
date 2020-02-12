@@ -1,0 +1,22 @@
+{
+    "name": "Pokdex",
+    "version": "1.0.0",
+    "description": "",
+    "main": "server.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "scss": "node-sass -w --output-style compressed scss -o public/css"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/mazuecos3/Pokedex"
+    },
+    "author": "Oscar Mazuecos",
+    "license": "ISC",
+    "dependencies": {
+
+        "express": "^4.17.1",
+        "node-sass": "^4.13.0",
+        "sass": "^1.23.7"
+    }
+}

@@ -1,0 +1,53 @@
+     $colorTexto: black;
+     $estilaTexto: Arial;
+     $negrita: bold;
+     $backgroundColor: #f0deb7;
+     %tamañoBusqueda {
+         width: 98%;
+     }
+     
+     $bordesColor:"";
+     // COLOR INICIAL #f0deb7
+     // Color INICIAL +Oscuro #dfc793
+     body {
+         margin: auto;
+         width: 100%;
+         font-family: $estilaTexto;
+         color: $colorTexto;
+         font-weight: $negrita;
+         background-color: $backgroundColor;
+     }
+     
+     h1 {
+         display: block;
+         margin-left: auto;
+         margin-right: auto;
+         width: 360px;
+         font-family: Ink Free;
+         text-align: center;
+         font-size: 4em;
+         -webkit-box-shadow: 0px 0px 9px 9px $bordesColor;
+         -moz-box-shadow: 0px 0px 9px 9px $bordesColor;
+         box-shadow: 0px 0px 9px 9px $bordesColor;
+         border-radius: 20px;
+     }
+     
+     #imgBackground {
+         display: block;
+         margin-left: auto;
+         margin-right: auto;
+         opacity: 0.6;
+         width: 300px;
+     }
+     
+     .resultados {}
+     
+     //Version Movil / ipads
+     @media only screen and (max-width: 750px) {
+         .busqueda {
+             display: none;
+             border-radius: 20%;
+             margin-right: 2%;
+             margin-left: 2%;
+         }
+     }
