@@ -1,7 +1,8 @@
 // Direccion json web
-const fuentesUrl = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=20";
+const fuentesUrl = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=100";
 // Simple script to use with datosAbiertos
-
+let arrayPokemonsPromesas = [];
+let mostrarImagenFondo = document.getElementById("imgBackground");
 //Filtar por comienzo de letra
 
 function filtroLetra(elemento) {
@@ -28,39 +29,39 @@ function buscar() {
 }
 //Funcion para buscar a los pokemons
 function buscarPokemons(resultado) {
+
     let imagen;
     let divPokemon;
     let nombre;
     let tipoPokemon
-    let numeroPokemon
+    let numeroPokemon;
+    let divResultados = document.getElementById("resultados");
     let divPokemons = document.createElement("div");
     divPokemons.id = "divPokemons";
 
-    //hacemos un foreach y luego un fetch para poder coger la url de cada pokemon
-    //también cogeremos el nombre y alguna características.
+    //por cada resultado nos quedamos la url para poder acceder a sus datos
     resultado.forEach(pokemon => {
-
-        const fetchPokemon = fetch(pokemon.url);
         // console.log(pokemon.url);
-        fetchPokemon.then(response => {
-            console.log(response);
-            return response.json();
+        //nos guardamos todas las promesas en un array para luego ejecutarlas todas en orden
+        arrayPokemonsPromesas.push(devuelvePokemon(pokemon.url));
+    });
 
-        }).then(respuesta => {
-
-            console.log(respuesta.id);
-            //creamos el div para cada Pokemon y sus caracteristcias
+    //una vez las tenemos todas hacmeos un promsie all para que una vez se cumplan todas las promesas,
+    //entonces por cada una de ellas haremos un for each para crear todos los datos de cada pokemon.
+    Promise.all(arrayPokemonsPromesas).then(respuesta => {
+        //hacemos un foreach y luego un fetch para poder coger la url de cada pokemon
+        respuesta.forEach(pokemon => {
             divPokemon = document.createElement("div");
             //añadimos la clase para cada divPokemon
             divPokemon.classList = "divPokemon";
             //nos quedamos con la imagen frontal de cada pokemon
             imagen = document.createElement("img");
-            imagen.src = respuesta.sprites.front_default;
+            imagen.src = pokemon.sprites.front_default;
             //console.log(imagen);
 
             //nos quedamos con el identificador de cada pokemon 
             numeroPokemon = document.createElement("p");
-            numeroPokemon.innerText = "#" + respuesta.id;
+            numeroPokemon.innerText = "#" + pokemon.id;
             //añadimos el nombre tipo de cada pokemon  
             nombre = document.createElement("p");
             nombre.innerText = pokemon.name;
@@ -68,19 +69,51 @@ function buscarPokemons(resultado) {
             //añadimos el primer tipo de cada pokemon
             //console.log(respuesta.types[0].type.url);
             tipoPokemon = document.createElement("p");
-            tipoPokemon.innerText = "Type: " + respuesta.types[0].type.name;
+            tipoPokemon.innerText = "Type: " + pokemon.types[0].type.name;
 
-            //creamos un div para cada pokemon para establecer imagen,texto,etc...
+
             divPokemon.appendChild(imagen);
             divPokemon.appendChild(numeroPokemon);
             divPokemon.appendChild(nombre);
             divPokemon.appendChild(tipoPokemon);
+
+            //añadimos todos los datos de cada pokemon al Div con los resultados del pokemon
             divPokemons.appendChild(divPokemon);
         });
+
+
+
+    })
+
+    //lo establecemos en blanco para que cada vez que busquemos se refresque.
+
+    divResultados.innerHTML = "";
+    //añadimos todos los pokemons a el div de los Resultados
+    divResultados.appendChild(divPokemons);
+
+    //acabar en casa
+    /* if (principalBoolean == true) {
+        //Función para deshabilitar la imagen de fondo
+        document.getElementById("imgBackground").style.display = "none";
+    } else {
+        //Función para habilitar la imagen de fondo
+        document.getElementById("imgBackground").style.display = "block";
+    } */
+    arrayPokemonsPromesas = [];
+}
+
+function devuelvePokemon(url) {
+    const fetchPokemon = fetch(url);
+    return fetchPokemon.then(response => {
+        //console.log(response);
+        return response.json();
+
+    }).then(respuesta => {
+
+        return respuesta;
+        //creamos el div para cada Pokemon y sus caracteristcias
+
     });
-    // Establecemos el divPokemons en la Web
-    document.querySelector(".resultados").innerHTML = "";
-    document.querySelector(".resultados").appendChild(divPokemons);
 }
 
 function init() {
