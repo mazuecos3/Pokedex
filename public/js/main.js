@@ -35,6 +35,7 @@ function buscarPokemons(resultado) {
     let nombre;
     let tipoPokemon
     let numeroPokemon;
+    let imgOcultar = document.getElementById("imgOcultar")
     let divResultados = document.getElementById("resultados");
     let divPokemons = document.createElement("div");
     divPokemons.id = "divPokemons";
@@ -92,13 +93,13 @@ function buscarPokemons(resultado) {
     divResultados.appendChild(divPokemons);
 
     //acabar en casa
-    /* if (principalBoolean == true) {
+    if (divResultados.innerHTML == "") {
         //Función para deshabilitar la imagen de fondo
-        document.getElementById("imgBackground").style.display = "none";
+        imgOcultar.style.display = "block";
     } else {
         //Función para habilitar la imagen de fondo
-        document.getElementById("imgBackground").style.display = "block";
-    } */
+        imgOcultar.style.display = "none";
+    }
     arrayPokemonsPromesas = [];
 }
 
