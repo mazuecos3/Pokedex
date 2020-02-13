@@ -11,7 +11,6 @@ function filtroLetra(elemento) {
     return elemento.name.startsWith(letra);
 }
 
-
 // Pasa a mayuscula el texto de propio input
 // se lanza cada vez que se realiza una insercion en
 // el texto del nombre.
@@ -23,13 +22,11 @@ function buscar() {
 
     // Obtenemos el JSON que esta definido
     const fetchPromesa = fetch(fuentesUrl);
-    // Cuando se resuelva la promesa
+
     fetchPromesa.then(response => {
-        // la pasamos a JSON
         return response.json();
-        // Y entonces
     }).then(respuesta => {
-        // Filtramos los resultados con el filtro definido anteriormente
+        // Filtramos los resultados 
         let resultado = respuesta.results.filter(filtroLetra);
         buscarPokemons(resultado);
     });

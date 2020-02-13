@@ -1,4 +1,4 @@
-     $colorTexto: black;
+     $colorTexto: rgb(48, 69, 136);
      $estilaTexto: Arial;
      $negrita: bold;
      $backgroundColor: lightblue;
@@ -10,34 +10,23 @@
      // COLOR INICIAL #f0deb7
      // Color INICIAL +Oscuro #dfc793
      body {
+         background-color: #fbb034;
+         background-image: linear-gradient(90deg, #fbb034 10%, #ffdd00 80%);
          margin: auto;
          width: 100%;
          font-family: $estilaTexto;
          color: $colorTexto;
          font-weight: $negrita;
-         background-color: $backgroundColor;
+         //background-color: $backgroundColor;
      }
      
-     h1 {
-         display: block;
-         margin-left: auto;
-         margin-right: auto;
-         width: 360px;
-         font-family: Ink Free;
-         text-align: center;
-         font-size: 4em;
-         -webkit-box-shadow: 0px 0px 9px 9px $bordesColor;
-         -moz-box-shadow: 0px 0px 9px 9px $bordesColor;
-         box-shadow: 0px 0px 9px 9px $bordesColor;
-         border-radius: 20px;
-     }
-     
-     //imagen  que desaparece al realizar busqueda
-     #imgBackground {
-         display: block;
-         margin-left: auto;
-         margin-right: auto;
-         opacity: 0.6;
+     #logo {
+         #imgBackground {
+             display: block;
+             margin-left: auto;
+             margin-right: auto;
+             opacity: 0.8;
+         }
      }
      
      //inputs y formulario busqueda
@@ -45,6 +34,10 @@
          display: grid;
          grid-template-columns: 1fr;
          justify-items: center;
+     }
+     
+     input:first-child {
+         width: 300px;
      }
      
      //todos los resultados
@@ -57,7 +50,7 @@
          //posicionamiento de cada divPokemon
          #divPokemons {
              display: grid;
-             grid-template-columns: repeat(3, 1fr);
+             grid-template-columns: repeat(3, 35%);
              justify-items: center;
              grid-gap: 2%;
          }
