@@ -1,19 +1,14 @@
 // Direccion json web
-const fuentesUrl = "https://pokeapi.co/api/v2/pokemon?offset=20&limit=20";
+const fuentesUrl = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=20";
 // Simple script to use with datosAbiertos
 
-// Esta es la funcion de filtrado para
-// obtener tan solo los elementos que cumplen
-// una serie de requisitos.
+//Filtar por comienzo de letra
 
 function filtroLetra(elemento) {
     let letra = document.querySelector(`input[name="nombrePokemon"]`).value;
     return elemento.name.startsWith(letra);
 }
-
-// Pasa a mayuscula el texto de propio input
-// se lanza cada vez que se realiza una insercion en
-// el texto del nombre.
+//Transformar a minusculas las letras que escribamos
 function toLowerCase() {
     document.querySelector(`input[name="nombrePokemon"]`).value = document.querySelector(`input[name="nombrePokemon"]`).value.toLowerCase();
 }
@@ -31,12 +26,13 @@ function buscar() {
         buscarPokemons(resultado);
     });
 }
-
+//Funcion para buscar a los pokemons
 function buscarPokemons(resultado) {
     let imagen;
     let divPokemon;
     let nombre;
     let tipoPokemon
+    let numeroPokemon
     let divPokemons = document.createElement("div");
     divPokemons.id = "divPokemons";
 
@@ -47,26 +43,36 @@ function buscarPokemons(resultado) {
         const fetchPokemon = fetch(pokemon.url);
         // console.log(pokemon.url);
         fetchPokemon.then(response => {
-            //console.log(response);
+            console.log(response);
             return response.json();
+
         }).then(respuesta => {
+
+            console.log(respuesta.id);
+            //creamos el div para cada Pokemon y sus caracteristcias
             divPokemon = document.createElement("div");
-            divPokemon.id = "divPokemon";
+            //añadimos la clase para cada divPokemon
+            divPokemon.classList = "divPokemon";
             //nos quedamos con la imagen frontal de cada pokemon
             imagen = document.createElement("img");
             imagen.src = respuesta.sprites.front_default;
-
             //console.log(imagen);
+
+            //nos quedamos con el identificador de cada pokemon 
+            numeroPokemon = document.createElement("p");
+            numeroPokemon.innerText = "#" + respuesta.id;
+            //añadimos el nombre tipo de cada pokemon  
             nombre = document.createElement("p");
-            nombre.innerHTML = "Name: " + pokemon.name;
+            nombre.innerText = pokemon.name;
 
             //añadimos el primer tipo de cada pokemon
-            console.log(respuesta.types[0].type.name);
+            //console.log(respuesta.types[0].type.url);
             tipoPokemon = document.createElement("p");
             tipoPokemon.innerText = "Type: " + respuesta.types[0].type.name;
 
             //creamos un div para cada pokemon para establecer imagen,texto,etc...
             divPokemon.appendChild(imagen);
+            divPokemon.appendChild(numeroPokemon);
             divPokemon.appendChild(nombre);
             divPokemon.appendChild(tipoPokemon);
             divPokemons.appendChild(divPokemon);

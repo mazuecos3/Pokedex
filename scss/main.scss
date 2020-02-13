@@ -49,16 +49,25 @@
          justify-items: center;
          //posicionamiento de cada divPokemon
          #divPokemons {
+             width: 40%;
              display: grid;
-             grid-template-columns: repeat(3, 35%);
+             grid-template-columns: repeat(3, 1fr);
              justify-items: center;
              grid-gap: 2%;
+             margin-top: 2%;
          }
-         #divPokemon {
+         .divPokemon {
+             width: 100%;
              display: grid;
-             grid-template-rows: 1fr, repeat(2, 100px);
+             grid-template-columns: 1fr;
+             grid-template-rows: 1fr, repeat(3, 50px);
              justify-items: center;
              grid-gap: 2%;
+             border: 5px solid rgb(48, 69, 136);
+             border-radius: 11px;
+             p {
+                 font-size: 20px;
+             }
          }
      }
      
