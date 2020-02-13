@@ -39,20 +39,20 @@ function buscarPokemons(resultado) {
     let imagen;
     let divPokemon;
     let nombre;
+    let tipoPokemon
     let divPokemons = document.createElement("div");
     divPokemons.id = "divPokemons";
 
     //hacemos un foreach y luego un fetch para poder coger la url de cada pokemon
-    //tambien cogeremos el nombre y alguna características.
+    //también cogeremos el nombre y alguna características.
     resultado.forEach(pokemon => {
 
         const fetchPokemon = fetch(pokemon.url);
         // console.log(pokemon.url);
         fetchPokemon.then(response => {
-            // console.log(response);
+            //console.log(response);
             return response.json();
         }).then(respuesta => {
-
             divPokemon = document.createElement("div");
             divPokemon.id = "divPokemon";
             //nos quedamos con la imagen frontal de cada pokemon
@@ -61,11 +61,17 @@ function buscarPokemons(resultado) {
 
             //console.log(imagen);
             nombre = document.createElement("p");
-            nombre.innerHTML = pokemon.name;
+            nombre.innerHTML = "Name: " + pokemon.name;
+
+            //añadimos el primer tipo de cada pokemon
+            console.log(respuesta.types[0].type.name);
+            tipoPokemon = document.createElement("p");
+            tipoPokemon.innerText = "Type: " + respuesta.types[0].type.name;
 
             //creamos un div para cada pokemon para establecer imagen,texto,etc...
             divPokemon.appendChild(imagen);
             divPokemon.appendChild(nombre);
+            divPokemon.appendChild(tipoPokemon);
             divPokemons.appendChild(divPokemon);
         });
     });
