@@ -1,7 +1,7 @@
      $colorTexto: black;
      $estilaTexto: Arial;
      $negrita: bold;
-     $backgroundColor: #f0deb7;
+     $backgroundColor: lightblue;
      %tamañoBusqueda {
          width: 98%;
      }
@@ -32,22 +32,47 @@
          border-radius: 20px;
      }
      
+     //imagen  que desaparece al realizar busqueda
      #imgBackground {
          display: block;
          margin-left: auto;
          margin-right: auto;
          opacity: 0.6;
-         width: 300px;
      }
      
-     .resultados {}
+     //inputs y formulario busqueda
+     .busqueda {
+         display: grid;
+         grid-template-columns: 1fr;
+         justify-items: center;
+     }
+     
+     //todos los resultados
+     .resultados {
+         display: grid;
+         grid-template-columns: 1fr;
+         align-items: center;
+         justify-content: center;
+         justify-items: center;
+         //posicionamiento de cada divPokemon
+         #divPokemons {
+             display: grid;
+             grid-template-columns: repeat(3, 1fr);
+             justify-items: center;
+         }
+         #divPokemon {
+             display: grid;
+             grid-template-rows: repeat(3, 1fr);
+             justify-items: center;
+         }
+     }
      
      //Version Movil / ipads
-     @media only screen and (max-width: 750px) {
+     /*  @media only screen and (max-width: 750px) {
          .busqueda {
              display: none;
              border-radius: 20%;
              margin-right: 2%;
              margin-left: 2%;
          }
-     }
+     } */
