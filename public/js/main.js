@@ -65,12 +65,12 @@ function buscarPokemons(resultado) {
             numeroPokemon.innerText = "#" + pokemon.id;
             //añadimos el nombre tipo de cada pokemon  
             nombre = document.createElement("p");
-            nombre.innerText = pokemon.name;
+            nombre.innerText = pokemon.name.toUpperCase();
 
             //añadimos el primer tipo de cada pokemon
             //console.log(respuesta.types[0].type.url);
             tipoPokemon = document.createElement("p");
-            tipoPokemon.innerText = "Type: " + pokemon.types[0].type.name;
+            tipoPokemon.innerText = pokemon.types[0].type.name.toUpperCase();
 
 
             divPokemon.appendChild(imagen);
