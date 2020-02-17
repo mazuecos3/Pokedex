@@ -11,7 +11,7 @@
      // Color INICIAL +Oscuro #dfc793
      body {
          background-color: #fbb034;
-         background-image: linear-gradient(90deg, #fbb034 10%, #ffdd00 80%);
+         background-repeat: no-repeat;
          margin: auto;
          width: 100%;
          font-family: "Lucida Console", Monaco, monospace;
@@ -21,6 +21,9 @@
      }
      
      #logo {
+         display: grid;
+         grid-template-columns: 1fr;
+         justify-items: center;
          #imgBackground {
              display: block;
              margin-left: auto;
@@ -36,7 +39,7 @@
          justify-items: center;
          #busquedaForm {
              input:first-child {
-                 width: 300px;
+                 width: 60%;
              }
              input {
                  padding: 3px;
@@ -45,7 +48,7 @@
                  border-width: 4px;
                  border-radius: 13px;
                  border-style: solid;
-                 background-color: #ffc824;
+                 background-color: #fbb034;
                  border-color: rgb(48, 69, 136);
                  color: rgb(48, 69, 136);
                  box-shadow: 1px 0px 8px 0px rgb(48, 69, 136);
@@ -60,6 +63,7 @@
          display: block;
          margin: 0 auto;
          opacity: 0.8;
+         width: 50%;
      }
      
      //todos los resultados
@@ -71,7 +75,7 @@
          justify-items: center;
          //posicionamiento de cada divPokemon
          #divPokemons {
-             width: 100%;
+             width: 80%;
              display: grid;
              grid-template-columns: repeat(3, 1fr);
              justify-items: center;
@@ -79,7 +83,7 @@
              margin-top: 2%;
          }
          .divPokemon {
-             width: 80%;
+             width: 90%;
              display: grid;
              grid-template-columns: 1fr;
              grid-template-rows: 1fr, repeat(3, 50px);
@@ -95,11 +99,44 @@
      }
      
      //Version Movil / ipads
-     /*  @media only screen and (max-width: 750px) {
-         .busqueda {
-             display: none;
-             border-radius: 20%;
-             margin-right: 2%;
-             margin-left: 2%;
+     @media only screen and (max-width: 750px) {
+         .resultados {
+             #divPokemons {
+                 width: 80%;
+                 display: grid;
+                 grid-template-columns: 1fr 1fr;
+                 justify-items: center;
+                 grid-gap: 50px;
+                 margin-top: 2%;
+             }
+             .divPokemon {
+                 p {
+                     text-align: center;
+                     font-size: 15px;
+                 }
+             }
          }
-     } */
+         .busqueda {
+             display: grid;
+             grid-template-columns: 1fr;
+             align-items: center;
+             justify-content: center;
+             justify-items: center;
+             #busquedaForm {
+                 input:first-child {
+                     width: 60%;
+                 }
+             }
+         }
+         #logo {
+             #imgBackground {
+                 width: 50%;
+             }
+         }
+         #imgOcultar {
+             display: block;
+             margin: 0 auto;
+             opacity: 0.8;
+             width: 70%;
+         }
+     }

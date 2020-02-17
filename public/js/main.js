@@ -61,8 +61,8 @@ function buscarPokemons(resultado) {
             //console.log(imagen);
 
             //nos quedamos con el identificador de cada pokemon 
-            numeroPokemon = document.createElement("p");
-            numeroPokemon.innerText = "#" + pokemon.id;
+            // numeroPokemon = document.createElement("p");
+            //numeroPokemon.innerText = "#" + pokemon.id;
             //añadimos el nombre tipo de cada pokemon  
             nombre = document.createElement("p");
             nombre.innerText = pokemon.name.toUpperCase();
@@ -74,7 +74,7 @@ function buscarPokemons(resultado) {
 
 
             divPokemon.appendChild(imagen);
-            divPokemon.appendChild(numeroPokemon);
+            //divPokemon.appendChild(numeroPokemon);
             divPokemon.appendChild(nombre);
             divPokemon.appendChild(tipoPokemon);
 
