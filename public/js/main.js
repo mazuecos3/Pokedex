@@ -112,7 +112,7 @@ function buscarPokemons(resultado) {
     let loader = document.querySelector(".loader")
     if (cortar) {
         loader.style.display = "block";
-        setTimeout(function() { loader.style.display = "none" }, 2500);
+        setTimeout(function() { loader.style.display = "none" }, 3000);
         cortar = false;
     }
 
