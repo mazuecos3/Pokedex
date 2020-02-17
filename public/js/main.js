@@ -88,7 +88,12 @@ function buscarPokemons(resultado) {
             //añadimos todos los datos de cada pokemon al Div con los resultados del pokemon
             divPokemons.appendChild(divPokemon);
         });
+    }).then(function() {
 
+        let loader = document.querySelector(".loader")
+
+
+        loader.style.display = "none";
 
 
     })
@@ -109,13 +114,8 @@ function buscarPokemons(resultado) {
         imgOcultar.style.display = "none";
 
     }
-    let loader = document.querySelector(".loader")
-    if (cortar) {
-        loader.style.display = "block";
-        setTimeout(function() { loader.style.display = "none" }, 3000);
-        cortar = false;
-    }
 
+    loader.style.display = "block";
     arrayPokemonsPromesas = [];
 }
 
