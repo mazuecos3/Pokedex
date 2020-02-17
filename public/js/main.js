@@ -1,9 +1,10 @@
 // Direccion json web
-const fuentesUrl = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=100";
+const fuentesUrl = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=897";
 // Simple script to use with datosAbiertos
 let arrayPokemonsPromesas = [];
 let mostrarImagenFondo = document.getElementById("imgBackground");
 //Filtar por comienzo de letra
+let cortar = true;
 
 function filtroLetra(elemento) {
     let letra = document.querySelector(`input[name="nombrePokemon"]`).value;
@@ -16,16 +17,21 @@ function toLowerCase() {
 
 function buscar() {
 
+
     // Obtenemos el JSON que esta definido
     const fetchPromesa = fetch(fuentesUrl);
 
     fetchPromesa.then(response => {
         return response.json();
+
     }).then(respuesta => {
         // Filtramos los resultados 
         let resultado = respuesta.results.filter(filtroLetra);
         buscarPokemons(resultado);
+
+
     });
+
 }
 //Funcion para buscar a los pokemons
 function buscarPokemons(resultado) {
@@ -47,10 +53,11 @@ function buscarPokemons(resultado) {
         arrayPokemonsPromesas.push(devuelvePokemon(pokemon.url));
     });
 
+    //hacemos un foreach y luego un fetch para poder coger la url de cada pokemon
     //una vez las tenemos todas hacmeos un promsie all para que una vez se cumplan todas las promesas,
     //entonces por cada una de ellas haremos un for each para crear todos los datos de cada pokemon.
     Promise.all(arrayPokemonsPromesas).then(respuesta => {
-        //hacemos un foreach y luego un fetch para poder coger la url de cada pokemon
+
         respuesta.forEach(pokemon => {
             divPokemon = document.createElement("div");
             //añadimos la clase para cada divPokemon
@@ -98,10 +105,21 @@ function buscarPokemons(resultado) {
         imgOcultar.style.display = "block";
     } else {
         //Función para habilitar la imagen de fondo
+
         imgOcultar.style.display = "none";
+
     }
+    let loader = document.querySelector(".loader")
+    if (cortar) {
+        loader.style.display = "block";
+        setTimeout(function() { loader.style.display = "none" }, 2500);
+        cortar = false;
+    }
+
     arrayPokemonsPromesas = [];
 }
+
+
 
 function devuelvePokemon(url) {
     const fetchPokemon = fetch(url);

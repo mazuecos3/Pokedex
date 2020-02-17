@@ -1,5 +1,5 @@
      $colorTexto: rgb(48, 69, 136);
-     $estilaTexto: "Lucida Console";
+     $estilaTexto: "Arial";
      $negrita: bold;
      $backgroundColor: lightblue;
      %tamañoBusqueda {
@@ -14,7 +14,7 @@
          background-repeat: no-repeat;
          margin: auto;
          width: 100%;
-         font-family: "Lucida Console", Monaco, monospace;
+         font-family: $estilaTexto;
          color: $colorTexto;
          font-weight: $negrita;
          //background-color: $backgroundColor;
@@ -53,7 +53,7 @@
                  color: rgb(48, 69, 136);
                  box-shadow: 1px 0px 8px 0px rgb(48, 69, 136);
                  font-style: none;
-                 font-family: cursive;
+                 font-family: $estilaTexto;
                  text-shadow: 1px 0px 2px rgb(48, 69, 136);
              }
          }
@@ -62,7 +62,7 @@
      #imgOcultar {
          display: block;
          margin: 0 auto;
-         opacity: 0.8;
+         opacity: 0.7;
          width: 50%;
      }
      
@@ -95,6 +95,67 @@
                  text-align: center;
                  font-size: 20px;
              }
+         }
+     }
+     
+     //Animación cargando...
+     .loader {
+         display: none;
+         margin: 0 auto;
+         font-size: 10px;
+         text-indent: -9999em;
+         width: 11em;
+         height: 11em;
+         border-radius: 50%;
+         background: #ffffff;
+         background: -moz-linear-gradient(left, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+         background: -webkit-linear-gradient(left, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+         background: -o-linear-gradient(left, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+         background: -ms-linear-gradient(left, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+         background: linear-gradient(to right, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+         position: relative;
+         -webkit-animation: load3 1.4s infinite linear;
+         animation: load3 1.4s infinite linear;
+     }
+     
+     .loader:before {
+         background: #FFF;
+         border-radius: 100% 0 0 0;
+     }
+     
+     .loader:after {
+         background: #fbb034;
+         width: 75%;
+         height: 75%;
+         border-radius: 50%;
+         content: '';
+         margin: auto;
+         position: absolute;
+         top: 0;
+         left: 0;
+         bottom: 0;
+         right: 0;
+     }
+     
+     @-webkit-keyframes load3 {
+         0% {
+             -webkit-transform: rotate(0deg);
+             transform: rotate(0deg);
+         }
+         100% {
+             -webkit-transform: rotate(360deg);
+             transform: rotate(360deg);
+         }
+     }
+     
+     @keyframes load3 {
+         0% {
+             -webkit-transform: rotate(0deg);
+             transform: rotate(0deg);
+         }
+         100% {
+             -webkit-transform: rotate(360deg);
+             transform: rotate(360deg);
          }
      }
      
@@ -136,7 +197,7 @@
          #imgOcultar {
              display: block;
              margin: 0 auto;
-             opacity: 0.8;
+             opacity: 0.7;
              width: 70%;
          }
      }
