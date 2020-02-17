@@ -4,6 +4,7 @@ const fuentesUrl = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=897";
 let arrayPokemonsPromesas = [];
 let mostrarImagenFondo = document.getElementById("imgBackground");
 //Filtar por comienzo de letra
+
 let cortar = true;
 
 function filtroLetra(elemento) {
@@ -16,6 +17,7 @@ function toLowerCase() {
 }
 
 function buscar() {
+
 
 
     // Obtenemos el JSON que esta definido
@@ -35,7 +37,7 @@ function buscar() {
 }
 //Funcion para buscar a los pokemons
 function buscarPokemons(resultado) {
-
+    let gif = document.getElementById("gifCargar");
     let imagen;
     let divPokemon;
     let nombre;
@@ -89,11 +91,10 @@ function buscarPokemons(resultado) {
             divPokemons.appendChild(divPokemon);
         });
     }).then(function() {
+        let gif = document.getElementById("gifCargar");
 
-        let loader = document.querySelector(".loader")
 
-
-        loader.style.display = "none";
+        gif.style.display = "none";
 
 
     })
@@ -115,7 +116,7 @@ function buscarPokemons(resultado) {
 
     }
 
-    loader.style.display = "block";
+    gif.style.display = "block";
     arrayPokemonsPromesas = [];
 }
 
