@@ -1,5 +1,5 @@
 // Direccion json web
-const fuentesUrl = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=50";
+const fuentesUrl = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=897";
 // Simple script to use with datosAbiertos
 let arrayPokemonsPromesas = [];
 let mostrarImagenFondo = document.getElementById("imgBackground");
@@ -17,8 +17,6 @@ function toLowerCase() {
 }
 
 function buscar() {
-
-
 
     // Obtenemos el JSON que esta definido
     const fetchPromesa = fetch(fuentesUrl);
@@ -71,7 +69,7 @@ function buscarPokemons(resultado) {
             //añadimos la clase para cada divPokemon
             divPokemon.classList = "divPokemon";
             ability = pokemon.abilities;
-            console.log(ability[0].ability.name);
+            //   console.log(ability[0].ability.name);
 
             let abilityText = document.createElement("p");
             abilityText.innerText = "Main attack: " +
@@ -102,26 +100,37 @@ function buscarPokemons(resultado) {
                     // Filtramos los resultados 
                     // console.log(respuesta.flavor_text_entries[9].flavor_text);
                     text = document.createElement("p");
-                    text.innerText = respuesta.flavor_text_entries[9].flavor_text;
+                    let arrayTexts = respuesta.flavor_text_entries;
+                    let contador = 0;
 
+                    // AQUI NOS QUEDAREMOS SOLO CON LAS DESCRIPCIONES QUE ESTNE EN INGLÉS, y solo con la primera descripción.
+                    for (let i = 0; i < arrayTexts.length; i++) {
+                        if (respuesta.flavor_text_entries[i].language.name == "en" && contador == 0) {
+                            text.innerText = respuesta.flavor_text_entries[i].flavor_text;
+                            contador++;
+                        }
+
+
+                    }
+                    //añadimos la descripcion al div
                     divAmpliar.appendChild(text);
 
                 });
-
+                //añadimos el resto de datos como nombre imagen y habilidad main a el div para mostrarlo.
                 divAmpliar.appendChild(nombre);
                 divAmpliar.appendChild(imagen);
                 divAmpliar.appendChild(abilityText);
-                // divAmpliar.appendChild(abilityText);
 
 
+                //hacemos que aparecza y desaparezca el div grande al hacer click en el pokemon y fuera de el.
                 divAmpliar.style.visibility = "visible";
                 divCapa.style.visibility = "visible";
 
                 divCapa.addEventListener("click", function() {
-                        divAmpliar.style.visibility = "hidden";
-                        divCapa.style.visibility = "hidden";
-                    })
-                    // divAmpliar.appendChild(url2);
+                    divAmpliar.style.visibility = "hidden";
+                    divCapa.style.visibility = "hidden";
+                })
+
 
 
             });
@@ -129,27 +138,20 @@ function buscarPokemons(resultado) {
             imagen = document.createElement("img");
             imagen.src = pokemon.sprites.front_default;
 
-            //console.log(imagen);
-
-            //nos quedamos con el identificador de cada pokemon 
-            // numeroPokemon = document.createElement("p");
-            //numeroPokemon.innerText = "#" + pokemon.id;
-            //añadimos el nombre tipo de cada pokemon  
+            //nos quedamos con el nombre de cad apokemon y lo ponemos con letras maysuculas
             nombre = document.createElement("p");
             nombre.innerText = pokemon.name.toUpperCase();
 
             //añadimos el primer tipo de cada pokemon
-            //console.log(respuesta.types[0].type.url);
             tipoPokemon = document.createElement("p");
             tipoPokemon.innerText = pokemon.types[0].type.name.toUpperCase();
 
 
+            //añadimos todos los datos de cada pokemon al Div con los resultados del pokemon
             divPokemon.appendChild(imagen);
-            //divPokemon.appendChild(numeroPokemon);
             divPokemon.appendChild(nombre);
             divPokemon.appendChild(tipoPokemon);
 
-            //añadimos todos los datos de cada pokemon al Div con los resultados del pokemon
             divPokemons.appendChild(divPokemon);
         });
     }).then(function() {
