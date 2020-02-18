@@ -39,17 +39,19 @@ function buscar() {
 function buscarPokemons(resultado) {
     let gif = document.getElementById("gifCargar");
     let divAmpliar = document.getElementById("ampliacion");
+    let divCapa = document.getElementById("capaProtectora");
     let imagen;
     let url2;
     let divPokemon;
     let nombre;
     let text;
     let tipoPokemon
-    let numeroPokemon;
     let imgOcultar = document.getElementById("imgOcultar")
     let divResultados = document.getElementById("resultados");
     let divPokemons = document.createElement("div");
     divPokemons.id = "divPokemons";
+    let ability;
+
 
     //por cada resultado nos quedamos la url para poder acceder a sus datos
     resultado.forEach(pokemon => {
@@ -65,46 +67,68 @@ function buscarPokemons(resultado) {
 
         respuesta.forEach(pokemon => {
             divPokemon = document.createElement("div");
+
             //añadimos la clase para cada divPokemon
             divPokemon.classList = "divPokemon";
-            //nos quedamos con la imagen frontal de cada pokemon
-            imagen = document.createElement("img");
-            imagen.src = pokemon.sprites.front_default;
-            imagen.addEventListener("click", function() {
-                //PREGUNTAR DUDAS
+            ability = pokemon.abilities;
+            console.log(ability[0].ability.name);
 
+            let abilityText = document.createElement("p");
+            abilityText.innerText = "Main attack: " +
+                ability[0].ability.name.toUpperCase();
+
+
+            divPokemon.addEventListener("click", function() {
+                //PREGUNTAR DUDAS
+                divAmpliar.innerHTML = "";
                 // console.log(divAmpliar);
                 // console.log(pokemon.name);
                 url2 = pokemon.species.url;
                 imagen.src = pokemon.sprites.front_default;
                 nombre.innerText = pokemon.name.toUpperCase();
+
+
+
                 // nombre.innerText = pokemon;
 
                 const fetchPromesa = fetch(url2);
 
                 fetchPromesa.then(response => {
-                    console.log(response);
+                    // console.log(response);
                     return response.json();
 
 
                 }).then(respuesta => {
                     // Filtramos los resultados 
-                    console.log(respuesta.flavor_text_entries[9].flavor_text);
+                    // console.log(respuesta.flavor_text_entries[9].flavor_text);
                     text = document.createElement("p");
                     text.innerText = respuesta.flavor_text_entries[9].flavor_text;
-                    console.log(text);
+
                     divAmpliar.appendChild(text);
 
                 });
 
-                divAmpliar.appendChild(imagen);
                 divAmpliar.appendChild(nombre);
+                divAmpliar.appendChild(imagen);
+                divAmpliar.appendChild(abilityText);
+                // divAmpliar.appendChild(abilityText);
 
 
-                // divAmpliar.appendChild(url2);
+                divAmpliar.style.visibility = "visible";
+                divCapa.style.visibility = "visible";
+
+                divCapa.addEventListener("click", function() {
+                        divAmpliar.style.visibility = "hidden";
+                        divCapa.style.visibility = "hidden";
+                    })
+                    // divAmpliar.appendChild(url2);
 
 
             });
+            //nos quedamos con la imagen frontal de cada pokemon
+            imagen = document.createElement("img");
+            imagen.src = pokemon.sprites.front_default;
+
             //console.log(imagen);
 
             //nos quedamos con el identificador de cada pokemon 
