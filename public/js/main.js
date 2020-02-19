@@ -18,6 +18,7 @@ function toLowerCase() {
 
 function buscar() {
 
+    alertaNombre();
     // Obtenemos el JSON que esta definido
     const fetchPromesa = fetch(fuentesUrl);
 
@@ -49,6 +50,7 @@ function buscarPokemons(resultado) {
     let divPokemons = document.createElement("div");
     divPokemons.id = "divPokemons";
     let ability;
+    let select = document.getElementById("select");
 
 
     //por cada resultado nos quedamos la url para poder acceder a sus datos
@@ -64,6 +66,7 @@ function buscarPokemons(resultado) {
     Promise.all(arrayPokemonsPromesas).then(respuesta => {
 
         respuesta.forEach(pokemon => {
+            console.log(pokemon);
             divPokemon = document.createElement("div");
 
             //añadimos la clase para cada divPokemon
@@ -72,9 +75,11 @@ function buscarPokemons(resultado) {
             //   console.log(ability[0].ability.name);
 
             let abilityText = document.createElement("p");
-            abilityText.innerText = "Main attack: " +
-                ability[0].ability.name.toUpperCase();
-
+            if (select.value == "ingles") {
+                abilityText.innerText = "Main attack: " + ability[0].ability.name.toUpperCase();
+            } else {
+                abilityText.innerText = "Ataque Principal: " + ability[0].ability.name.toUpperCase();
+            }
 
             divPokemon.addEventListener("click", function() {
                 //PREGUNTAR DUDAS
@@ -105,10 +110,19 @@ function buscarPokemons(resultado) {
 
                     // AQUI NOS QUEDAREMOS SOLO CON LAS DESCRIPCIONES QUE ESTNE EN INGLÉS, y solo con la primera descripción.
                     for (let i = 0; i < arrayTexts.length; i++) {
-                        if (respuesta.flavor_text_entries[i].language.name == "en" && contador == 0) {
-                            text.innerText = respuesta.flavor_text_entries[i].flavor_text;
-                            contador++;
+
+                        if (select.value == "ingles") {
+                            if (respuesta.flavor_text_entries[i].language.name == "en" && contador == 0) {
+                                text.innerText = respuesta.flavor_text_entries[i].flavor_text;
+                                contador++;
+                            }
+                        } else {
+                            if (respuesta.flavor_text_entries[i].language.name == "es" && contador == 0) {
+                                text.innerText = respuesta.flavor_text_entries[i].flavor_text;
+                                contador++;
+                            }
                         }
+
 
 
                     }
@@ -198,6 +212,13 @@ function devuelvePokemon(url) {
         //creamos el div para cada Pokemon y sus caracteristcias
 
     });
+}
+
+function alertaNombre() {
+    if (document.querySelector(`input[type="text"]`).value == "") {
+        alert("No ha escrito ningún nombre, van a cargar todos los pokémons.");
+    }
+
 }
 
 function init() {
