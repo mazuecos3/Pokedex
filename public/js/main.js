@@ -1,5 +1,5 @@
 // Direccion json web
-const fuentesUrl = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=50";
+const fuentesUrl = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=897";
 // Simple script to use with datosAbiertos
 let arrayPokemonsPromesas = [];
 let mostrarImagenFondo = document.getElementById("imgBackground");
