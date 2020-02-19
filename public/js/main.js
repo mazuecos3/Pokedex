@@ -1,5 +1,5 @@
 // Direccion json web
-const fuentesUrl = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=897";
+const fuentesUrl = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=50";
 // Simple script to use with datosAbiertos
 let arrayPokemonsPromesas = [];
 let mostrarImagenFondo = document.getElementById("imgBackground");
@@ -51,7 +51,7 @@ function buscarPokemons(resultado) {
     divPokemons.id = "divPokemons";
     let ability;
     let select = document.getElementById("select");
-
+    let contadorIndex = 1;
 
     //por cada resultado nos quedamos la url para poder acceder a sus datos
     resultado.forEach(pokemon => {
@@ -66,7 +66,7 @@ function buscarPokemons(resultado) {
     Promise.all(arrayPokemonsPromesas).then(respuesta => {
 
         respuesta.forEach(pokemon => {
-            console.log(pokemon);
+            //console.log(pokemon);
             divPokemon = document.createElement("div");
 
             //añadimos la clase para cada divPokemon
@@ -150,8 +150,12 @@ function buscarPokemons(resultado) {
             });
             //nos quedamos con la imagen frontal de cada pokemon
             imagen = document.createElement("img");
+            // console.log(pokemon.name);
+            imagen.tabIndex = contadorIndex;
             imagen.src = pokemon.sprites.front_default;
+            imagen.alt = pokemon.name;
 
+            contadorIndex++;
             //nos quedamos con el nombre de cad apokemon y lo ponemos con letras maysuculas
             nombre = document.createElement("p");
             nombre.innerText = pokemon.name.toUpperCase();
@@ -160,21 +164,38 @@ function buscarPokemons(resultado) {
             tipoPokemon = document.createElement("p");
             tipoPokemon.innerText = pokemon.types[0].type.name.toUpperCase();
 
+            /*   const fetchPromesaTypes = fetch(urlTypes);
+
+              fetchPromesaTypes.then(response => {
+                  // console.log(response);
+                  return response.json();
+              }).then(respuesta => {
+
+                  if (select.value == "ingles") {
+                      // si es en ingles numero 2 del json
+                      //console.log(respuesta.names[6].name);    
+                      tipoPokemon.innerText = respuesta.names[6].name.toUpperCase();
+
+                  } else {
+                      //si es en español, numero 4 del json
+                      //console.log(respuesta.names[4].name);
+                        tipoPokemon.innerText = respuesta.names[2].name.toUpperCase();
+
+                  }
+              }); */
 
             //añadimos todos los datos de cada pokemon al Div con los resultados del pokemon
             divPokemon.appendChild(imagen);
             divPokemon.appendChild(nombre);
             divPokemon.appendChild(tipoPokemon);
 
+
             divPokemons.appendChild(divPokemon);
         });
     }).then(function() {
+
         let gif = document.getElementById("gifCargar");
-
-
         gif.style.display = "none";
-
-
     })
 
     //lo establecemos en blanco para que cada vez que busquemos se refresque.
@@ -215,9 +236,10 @@ function devuelvePokemon(url) {
 }
 
 function alertaNombre() {
-    if (document.querySelector(`input[type="text"]`).value == "") {
+    console.log("No has escrito ningún nombre, por defecto cargaremos todos.");
+    /* if (document.querySelector(`input[type="text"]`).value == "") {
         alert("No ha escrito ningún nombre, van a cargar todos los pokémons.");
-    }
+    } */
 
 }
 
