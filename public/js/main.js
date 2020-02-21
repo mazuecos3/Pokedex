@@ -246,7 +246,7 @@ function alertaNombre() {
 function init() {
 
     // Click en el boton de buscar
-    document.querySelector(`input[type="button"]`).addEventListener("click", buscar);
+    document.querySelector(`input[type="text"]`).addEventListener("keyup", buscar);
     // Texto cambia en el <input>
     document.querySelector(`input[type="text"]`).addEventListener("input", toLowerCase);
 }
